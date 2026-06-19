@@ -19,7 +19,7 @@ export default function PropertyCard({
 
   return (
     <TouchableOpacity
-      className="flex-row rounded-2xl  mb-4 overflow-hidden bg-white"
+      className="flex-row rounded-2xl mx-4 mb-4 overflow-hidden bg-white"
       style={{
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
@@ -31,7 +31,12 @@ export default function PropertyCard({
       onPress={() => router.push(`/(root)/property/${property.id}`)}
     >
       <Image
-        source={{ uri: property.images[0] }}
+        source={{
+          uri:
+            property.images.length > 0
+              ? property.images[0]
+              : require("@/assets/images/kribb.png"),
+        }}
         className="w-28 h-28 "
         resizeMode="cover"
       />
@@ -55,7 +60,7 @@ export default function PropertyCard({
             {formatPrice(Number(property.price))}
           </Text>
           {/* sold badge */}
-          {!property.is_sold && (
+          {property.is_sold && (
             <View className=" bg-red-50 px-2 py-0.5 rounded-full">
               <Text className="text-xs font-semibold text-red-500">Sold</Text>
             </View>
